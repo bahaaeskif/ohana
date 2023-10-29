@@ -9,9 +9,10 @@ import test from "../Assets/bahaa.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 
 const Hero: React.FC = () => {
+  const controls = useAnimationControls();
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
 
@@ -31,18 +32,58 @@ const Hero: React.FC = () => {
           swiper.params.navigation.nextEl = navigationNextRef?.current;
         }}
         pagination={{ clickable: true }}
+        // onSlideChange={() => {
+        //   controls.start("animate");
+        //   console.log("start");
+        // }}
       >
         <SwiperSlide className=" bg-blue-200 relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-[#0004] pointer-events-none"></div>
-          <motion.div variants={fade} animate={"hidden"}>
-            {" "}
-            <img src={test} alt="" className="w-full h-full object-cover" />
-          </motion.div>
+          {({ isActive }) => (
+            <div className="w-full h-full relative">
+              <motion.div
+                initial={{ opacity: 1 }}
+                animate={{
+                  opacity: isActive ? 0.2 : 1,
+                }}
+                transition={{ duration: 1.2 }}
+                className="absolute top-0 left-0 w-full h-full bg-[#000] pointer-events-none z-10"
+              ></motion.div>
+              <motion.img
+                src={test}
+                alt=""
+                className="w-full h-full object-cover"
+                initial={{ scale: 1 }}
+                animate={{
+                  scale: isActive ? 1.3 : 1,
+                }}
+                transition={{ duration: 20, ease: "linear" }}
+              />
+            </div>
+          )}
         </SwiperSlide>
-        <SwiperSlide className="bg-blue-200 relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-[#0003] pointer-events-none"></div>
-
-          <img src={test} alt="" className="w-full h-full object-cover" />
+        <SwiperSlide className=" bg-blue-200 relative">
+          {({ isActive }) => (
+            <div className="w-full h-full relative">
+              <motion.div
+                initial={{ opacity: 1 }}
+                animate={{
+                  opacity: isActive ? 0.2 : 1,
+                }}
+                transition={{ duration: 1.2 }}
+                className="absolute top-0 left-0 w-full h-full bg-[#000] pointer-events-none z-10"
+              ></motion.div>
+              <motion.img
+                src={test}
+                alt=""
+                className="w-full h-full object-cover"
+                initial={{ scale: 1 }}
+                animate={{
+                  scale: isActive ? 1.3 : 1,
+                }}
+                transition={{ duration: 20, ease: "linear" }}
+              />
+            </div>
+          )}
         </SwiperSlide>
       </Swiper>
 
