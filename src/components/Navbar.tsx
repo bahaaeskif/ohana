@@ -2,9 +2,34 @@ import React from "react";
 
 const Navbar: React.FC = () => {
   const [toggel, setToggle] = React.useState(false);
+  const [trigger, setTrigger] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
+  console.log("🚀 ~ file: Navbar.tsx:6 ~ trigger:", trigger);
+  window.addEventListener(
+    "scroll",
+    function () {
+      let top = this.scrollY;
+      if (top >= 200) {
+        setTrigger(true);
+        setHidden(true);
+      }
+
+      if (top == 0) {
+        setTrigger(false);
+        setHidden(false);
+      }
+    },
+    false
+  );
   return (
-    <header className=" absolute top-0 left-0 w-full z-[99999] p-3">
-      <nav className=" justify-between items-center text-white hidden md:flex ">
+    <header
+      className={`${hidden ? " fixed" : "  absolute"} ${
+        trigger ? "bg-[#8b8b8d86]" : "bg-[#fff0]"
+      }  top-0 left-0 w-full z-[99999] p-3 transition-all  duration-[2000]`}
+    >
+      <nav
+        className={`  justify-between items-center text-white hidden md:flex `}
+      >
         <ul className=" list-none m-0 flex justify-center items-center gap-2">
           <li>New-in</li>
           <li>Teenagers</li>
