@@ -1,25 +1,34 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-
-import { NavigationOptions } from "swiper/types";
-
 import p1 from "../Assets/1.jpg";
 import p2 from "../Assets/2.jpg";
+
+// types
+import { NavigationOptions } from "swiper/types";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+// library
 import { motion } from "framer-motion";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+
+// components
+import ButtonSlider from "../Common/ButtonSlider";
+// animations
+import { fade, parallex, slideIn, slideUp } from "../animation/motion";
 
 const Hero: React.FC = () => {
+  // refreance to the buttons which controlling in slider
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
 
   return (
     <div className="group">
+      {/* define slider */}
       <Swiper
-        className=""
         spaceBetween={0}
         slidesPerView={1}
         modules={[Navigation, Pagination]}
@@ -33,41 +42,24 @@ const Hero: React.FC = () => {
           navigation.nextEl = navigationNextRef?.current;
         }}
         pagination={{ clickable: true }}
-        // onSlideChange={() => {
-        //   controls.start("animate");
-        //   console.log("start");
-        // }}
       >
         <SwiperSlide className=" bg-blue-200 relative">
           {({ isActive }) => (
             <div className="w-full h-full relative">
               <motion.div
-                initial={{ opacity: 1 }}
-                animate={{
-                  opacity: isActive ? 0.2 : 1,
-                }}
-                transition={{ duration: 1.2 }}
+                {...fade(isActive)}
                 className="absolute top-0 left-0 w-full h-full bg-[#000] pointer-events-none z-10"
               ></motion.div>
               <motion.img
                 src={p1}
                 alt=""
                 className="w-full h-full object-cover"
-                initial={{ scale: 1 }}
-                animate={{
-                  scale: isActive ? 1.3 : 1,
-                }}
-                transition={{ duration: 20, ease: "linear" }}
+                {...parallex(isActive)}
               />
               <motion.button
                 className=" text-[#b9b9b6] absolute bottom-24  z-10 uppercase px-4 py-2 border border-[#b9b9b6] rounded-xl hover:border-[#b9b9b6] hover:text-[#b9b9b6]
              "
-                initial={{ left: "40%" }}
-                animate={{
-                  left: isActive ? "50%" : "40%",
-                  x: isActive ? "-50%" : 0,
-                }}
-                transition={{ duration: 0.9, ease: "linear" }}
+                {...slideIn(isActive)}
               >
                 shop now
               </motion.button>
@@ -78,31 +70,18 @@ const Hero: React.FC = () => {
           {({ isActive }) => (
             <div className="w-full h-full relative">
               <motion.div
-                initial={{ opacity: 1 }}
-                animate={{
-                  opacity: isActive ? 0.2 : 1,
-                }}
-                transition={{ duration: 0.9 }}
+                {...fade(isActive)}
                 className="absolute top-0 left-0 w-full h-full bg-[#000] pointer-events-none z-10"
               ></motion.div>
               <motion.img
                 src={p2}
                 alt=""
                 className="w-full h-full object-cover"
-                initial={{ scale: 1 }}
-                animate={{
-                  scale: isActive ? 1.3 : 1,
-                }}
-                transition={{ duration: 20, ease: "linear" }}
+                {...parallex(isActive)}
               />
 
               <motion.div
-                initial={{ bottom: "0%", opacity: 0 }}
-                animate={{
-                  bottom: isActive ? "25%" : "0%",
-                  opacity: isActive ? 1 : 0,
-                }}
-                transition={{ duration: 0.9, ease: "linear" }}
+                {...slideUp(isActive)}
                 className=" absolute z-10 uppercase flex justify-center items-center flex-col gap-6 right-[50%] !translate-x-[50%] translate-y-[50%] "
               >
                 <h2 className="text-[#bab7b6] text-6xl capitalize">PASSION</h2>
@@ -116,21 +95,9 @@ const Hero: React.FC = () => {
         </SwiperSlide>
       </Swiper>
 
-      <button
-        ref={navigationPrevRef}
-        className=" border-transparent text-transparent absolute left-8 
-        group-hover:-translate-x-[20%] top-[50%] translate-y-[-50%] group-hover:border-[#fff] border-2 z-10 w-[40px] h-[40px] rounded-full group-hover:text-white hover:bg-[#272829]
-        hover:border-[#272829] transition-all duration-400"
-      >
-        <i className="bx bx-chevron-left text-3xl "></i>
-      </button>
-      <button
-        ref={navigationNextRef}
-        className=" border-transparent text-transparent next absolute right-8 top-[50%] translate-y-[-50%] z-10 w-[40px] h-[40px] rounded-full group-hover:translate-x-[20%] group-hover:border-[#fff] border-2 group-hover:text-white hover:bg-[#272829]
-        hover:border-[#272829] transition-all duration-400"
-      >
-        <i className="bx bx-chevron-right text-3xl"></i>
-      </button>
+      {/* reusable controler for slider */}
+      <ButtonSlider navigationRef={navigationNextRef} isNext={true} />
+      <ButtonSlider navigationRef={navigationPrevRef} isNext={false} />
     </div>
   );
 };

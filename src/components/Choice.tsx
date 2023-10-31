@@ -15,7 +15,7 @@ const Choice: React.FC = () => {
       <div className=" py-2 flex justify-center items-center gap-4 flex-wrap">
         {[1, 2, 3, 4].map(() => {
           return (
-            <div className="text-white flex justify-center items-center flex-col basis-[100%] md:basis-[20%] relative group">
+            <div className="text-white flex justify-center items-center flex-col basis-[47%] sm:basis-[20%] relative group">
               <div className="mb-2 relative ">
                 <img src={p13} alt="" className="w-full h-full object-cover" />
               </div>

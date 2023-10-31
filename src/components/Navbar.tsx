@@ -4,11 +4,11 @@ const Navbar: React.FC = () => {
   const [toggel, setToggle] = React.useState(false);
   const [trigger, setTrigger] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
-  console.log("🚀 ~ file: Navbar.tsx:6 ~ trigger:", trigger);
+
   window.addEventListener(
     "scroll",
     function () {
-      let top = this.scrollY;
+      const top = this.scrollY;
       if (top >= 200) {
         setTrigger(true);
         setHidden(true);
@@ -21,6 +21,7 @@ const Navbar: React.FC = () => {
     },
     false
   );
+
   return (
     <header
       className={`${hidden ? " fixed" : "  absolute"} ${
@@ -64,6 +65,7 @@ const Navbar: React.FC = () => {
           </ul>
         </nav>
       )}
+
       {toggel && (
         <div className=" fixed top-0 left-0 z-[999] w-full h-full bg-[#0009] flex justify-center items-center flex-col">
           <div

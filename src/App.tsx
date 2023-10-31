@@ -2,7 +2,7 @@ import React from "react";
 import Home from "./pages/Home";
 import Hero from "./components/Hero";
 import Newarrival from "./components/Newarrival";
-import Banner from "./components/banner";
+import Banner from "./components/Banner";
 import Choice from "./components/Choice";
 import Footer from "./components/Footer";
 
@@ -23,6 +23,9 @@ const App: React.FC = () => {
           <Footer />
         </div>
       </div>
+      <footer className="bg-[#272829] py-2 text-white text-center ">
+        ©OHANA 2023 All rights reserved.
+      </footer>
     </>
   );
 };
