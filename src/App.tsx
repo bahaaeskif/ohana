@@ -6,26 +6,19 @@ import Banner from "./components/Banner";
 import Choice from "./components/Choice";
 import Footer from "./components/Footer";
 
+import { Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import ProductsPage from "./pages/ProductsPage";
+
 const App: React.FC = () => {
   return (
     <>
-      <div className="px-6 sm:px-1 flex justify-center items-center">
-        <div className="xl:max-w-[1320px] w-full">
-          <Home />
-        </div>
-      </div>
-      <Hero />
-      <div className="px-6 sm:px-1 flex justify-center items-center">
-        <div className="xl:max-w-[1320px] w-full">
-          <Newarrival />
-          <Banner />
-          <Choice />
-          <Footer />
-        </div>
-      </div>
-      <footer className="bg-[#272829] py-2 text-white text-center ">
-        ©OHANA 2023 All rights reserved.
-      </footer>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="products" element={<ProductsPage />} />
+        </Route>
+      </Routes>
     </>
   );
 };

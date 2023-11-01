@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <div className="hidden sm:flex  ">
+      <div className="hidden sm:flex  bg-[#1b1b1b]">
         <div className="w-full mt-24 text-sm">
           <div className="h-[1px] max-w-[650px] my-[10px] mx-auto bg-white"></div>
           <div className=" mt-4 mx-auto flex justify-center items-center gap-2">

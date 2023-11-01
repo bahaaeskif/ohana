@@ -2,7 +2,7 @@ import React from "react";
 
 const Navbar: React.FC = () => {
   const [toggel, setToggle] = React.useState(false);
-  const [trigger, setTrigger] = React.useState(false);
+  const [trigger, setTrigger] = React.useState(true);
   const [hidden, setHidden] = React.useState(false);
 
   window.addEventListener(
